@@ -26,13 +26,6 @@ public class Player {
         } else {
             UserInterface.printMessage("You cannot go that way.");
         }
-
-            nextRoom = currentRoom.getRoomInDirection(Direction);
-
-            if (nextRoom != null) {
-                currentRoom = nextRoom;
-            }
-
         }
     }
 
