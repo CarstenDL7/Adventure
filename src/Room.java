@@ -1,11 +1,16 @@
+import java.util.ArrayList;
+
 public class Room {
 
-    private String name;
-    private String roomDescription;
+    private final String name;
+    private final String roomDescription;
     private Room north;
     private Room west;
     private Room south;
     private Room east;
+
+    private ArrayList<Item> itemsInRoom = new ArrayList<>();
+    private ArrayList<Enemy> enemiesInRoom = new ArrayList<>();
 
 
     public Room(String name, String roomDescription) {
@@ -18,7 +23,24 @@ public class Room {
     }
 
     public String getRoomDescription() {
-        return roomDescription;
+        StringBuilder description = new StringBuilder(roomDescription);
+
+        // Append items in the room to the description
+        if (!itemsInRoom.isEmpty())
+        description.append("\nItems in the room: ");
+        for (Item item : itemsInRoom) {
+            description.append(item.getFullName()).append(", ");
+        }
+
+
+        // Append enemies in the room to the description
+        if (!enemiesInRoom.isEmpty())
+        description.append("\nEnemies in the room: ");
+        for (Enemy enemy : enemiesInRoom) {
+            description.append(enemy.getDescription()).append(", ");
+        }
+
+        return description.toString();
     }
 
     public void setNorth(Room north) {
@@ -51,6 +73,51 @@ public class Room {
                 return null;
 
         }
+    }
+
+    public void addItemToRoom(Item item)
+    {
+        itemsInRoom.add(item);
+    }
+
+    public void removeItemFromRoom(Item item)
+    {
+        itemsInRoom.remove(item);
+    }
+
+    public ArrayList<Item> getItemsInRoom()
+    {
+        return itemsInRoom;
+    }
+
+    public Item findItemInRoom(String itemName) {
+        for (Item item : itemsInRoom) {
+            if (item.getShortName().equalsIgnoreCase(itemName)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public void addEnemyToRoom(Enemy enemy) {
+        enemiesInRoom.add(enemy);
+    }
+
+    public void removeEnemyFromRoom(Enemy enemy) {
+        enemiesInRoom.remove(enemy);
+    }
+
+    public ArrayList<Enemy> getEnemiesInRoom() {
+        return enemiesInRoom;
+    }
+
+    public Enemy findEnemyInRoom(String enemyName) {
+        for (Enemy enemy : enemiesInRoom) {
+            if (enemy.getName().equalsIgnoreCase(enemyName)) {
+                return enemy;
+            }
+        }
+        return null;
     }
 
 }

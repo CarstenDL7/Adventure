@@ -14,9 +14,12 @@ public class Map {
         Room room8 = new Room("Room 8", "Room 8");
         Room room9 = new Room("Room 9", "Room 9");
 
+        Enemy kingTut = new Enemy("Mummy","The Mummy of the ancient King Ramesess!", 25, new Weapon("The Ancient Sword of the Pharaoh", "Sword", 40));
+
         room1.setEast(room2);
         room1.setSouth(room4);
 
+        room2.addItemToRoom(new RangedWeapon("An old Colt revolver", "Revolver", 25, 6));
         room2.setWest(room1);
         room2.setEast(room3);
 
@@ -26,6 +29,7 @@ public class Map {
         room4.setNorth(room1);
         room4.setSouth(room7);
 
+        room5.addEnemyToRoom(kingTut);
         room5.setSouth(room8);
 
         room6.setNorth(room3);
